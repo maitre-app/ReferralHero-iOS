@@ -76,7 +76,53 @@ class WEB_HELPER
     }
     
     //MARK:- POST SERVICE
-    func api_POST(endPoint: String, param: [String : Any], completion: @escaping (Result<[String: Any], Error>) -> Void) {
+    func api_POST(endPoint: String, param: [String : Any], completion: @escaping (Result<[String: Any], Error>, Data?) -> Void) {
+        let passParam = self.getDefaultParam(param: param)
+        
+        guard let url = URL(string: self.getBaseUrl() + endPoint) else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)), nil)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+           if let jsonData = try? JSONSerialization.data(withJSONObject: passParam) {
+               request.httpBody = jsonData
+               request.addValue("application/vnd.referralhero.v1", forHTTPHeaderField: "Accept")
+               request.addValue(RHApiKey.apiKey, forHTTPHeaderField: "Authorization")
+               request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+           }
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                completion(.failure(error), nil)
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure(NSError(domain: "Invalid HTTP response", code: 0, userInfo: nil)), nil)
+                return
+            }
+            
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    if let dataDictionary = json as? [String: Any] {
+                        completion(.success(dataDictionary), data)
+                    } else {
+                        completion(.failure(NSError(domain: "Invalid JSON response", code: 0, userInfo: nil)), nil)
+                    }
+                } catch {
+                    completion(.failure(error), nil)
+                }
+            }
+        }
+        
+        task.resume()
+    }
+    //MARK:- DELETE SERVICE
+    func api_DELETE(endPoint: String, param: [String : Any], completion: @escaping (Result<[String: Any], Error>) -> Void) {
         let passParam = self.getDefaultParam(param: param)
         
         guard let url = URL(string: self.getBaseUrl() + endPoint) else {
@@ -85,7 +131,7 @@ class WEB_HELPER
         }
         
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = "DELETE"
            if let jsonData = try? JSONSerialization.data(withJSONObject: passParam) {
                request.httpBody = jsonData
                request.addValue("application/vnd.referralhero.v1", forHTTPHeaderField: "Accept")
@@ -118,10 +164,8 @@ class WEB_HELPER
                 }
             }
         }
-        
         task.resume()
     }
-    
     //MARK:- PUT SERVICE
     func api_PUT(endPoint: String, param: [String : String], completion: @escaping (Result<[String: Any], Error>) -> Void) {
         let passParam = self.getDefaultParam(param: param)

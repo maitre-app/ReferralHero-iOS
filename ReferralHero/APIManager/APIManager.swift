@@ -20,41 +20,31 @@ public class API_HELPER
     
     //MARK: - EndPoints - POST -
     let subscribers = "/subscribers"
-    internal func storeUserData(response: [String: Any]) {
-        do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: response, requiringSecureCoding: false)
+    internal func storeUserData(response: Data?) {
+        if let data = response
+        {
             UserDefaults.standard.set(data, forKey: "User")
             UserDefaults.standard.synchronize()
             print("Dictionary stored in UserDefaults.")
-        } catch {
-            print("Error storing dictionary: \(error)")
         }
     }
     
     internal func retrieveUserData(){
         if let data = UserDefaults.standard.data(forKey: "User") {
-            do {
-                if let dictionary = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSDictionary.self, from: data) as? [String: Any] {
-                    user = try decoder.decode(SubscriberModel.self, from: data)
-                    debugPrint(user?.data?.id as Any)
-                    print("Retrieved subscriber data: \(dictionary)")
-                }
-            } catch {
-                print("Error retrieving subscriber data: \(error)")
-            }
+                user = try? decoder.decode(SubscriberModel.self, from: data)
         } else {
-            debugPrint("User  not found in UserDefaults.")
-        }
+                debugPrint("User  not found in UserDefaults.")
+            }
     }
     
     //MARK: - CreateNewSubscriber API -
     
     public func Submit(param: RHSubscriber){
         WEB_SER.api_POST(endPoint: subscribers, param: param.toDictionary())
-        { [self] (result) in
+        { [self] (result,data) in
             switch result{
                 case .success(let response):
-                    self.storeUserData(response: response)
+                    self.storeUserData(response: data)
                     self.retrieveUserData()
                     ConfirmReferral()
                     delegate?.didReceiveAPIResponse(response, "Create new subscriber")
@@ -70,7 +60,7 @@ public class API_HELPER
     
     func ConfirmReferral(){
         WEB_SER.api_POST(endPoint: subscribers + "/\(user?.data?.id ?? "")" + "/confirm", param: [:])
-        { [self] (result) in
+        { [self] (result, data) in
             switch result{
                 case .success(let response):
                     delegate?.didReceiveAPIResponse(response, "Confirm referral")
@@ -81,12 +71,26 @@ public class API_HELPER
             }
         }
     }
+    //MARK: - Delete Referral API -
     
+    func DeleteReferral(){
+        WEB_SER.api_DELETE(endPoint: subscribers + "\(user?.data?.id ?? "")", param: [:])
+        { [self] (result) in
+            switch result{
+                case .success(let response):
+                    delegate?.didReceiveAPIResponse(response, "DeleteReferral")
+                    print(response)
+                case .failure(let err):
+                    delegate?.didFailWithError(err, "DeleteReferral")
+                    print(err)
+            }
+        }
+    }
     //MARK: - Track Referral API -
     
     func TrackReferral(param: RHTrackReferral){
         WEB_SER.api_POST(endPoint: subscribers + "/track_referral_conversion_event", param: param.toDictionary())
-        { [self] (result) in
+        { [self] (result, data) in
             switch result{
                 case .success(let response):
                     delegate?.didReceiveAPIResponse(response, "TrackReferral")
@@ -102,7 +106,7 @@ public class API_HELPER
     
     func Promote(){
         WEB_SER.api_POST(endPoint: subscribers + "/\(user?.data?.id ?? "")" + "/promote", param: [:])
-        { [self] (result) in
+        { [self] (result, data) in
             switch result{
                 case .success(let response):
                     delegate?.didReceiveAPIResponse(response, "Promote")
