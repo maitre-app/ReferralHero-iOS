@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5377F7882A1370510038FB17 /* ReferralHero.docc in Sources */ = {isa = PBXBuildFile; fileRef = 5377F7872A1370510038FB17 /* ReferralHero.docc */; };
-		5377F78E2A1370520038FB17 /* ReferralHero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5377F7832A1370510038FB17 /* ReferralHero.framework */; };
-		5377F7932A1370520038FB17 /* ReferralHeroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5377F7922A1370520038FB17 /* ReferralHeroTests.swift */; };
 		5377F7942A1370520038FB17 /* ReferralHero.h in Headers */ = {isa = PBXBuildFile; fileRef = 5377F7862A1370510038FB17 /* ReferralHero.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5377F79F2A13725B0038FB17 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5377F79E2A13725B0038FB17 /* APIManager.swift */; };
 		5377F8A62A13C1BC0038FB17 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5377F8A52A13C1BC0038FB17 /* WebService.swift */; };
@@ -18,22 +16,10 @@
 		53FC1B492A163E5000111843 /* RHDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FC1B482A163E5000111843 /* RHDelegate.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		5377F78F2A1370520038FB17 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5377F77A2A1370510038FB17 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5377F7822A1370510038FB17;
-			remoteInfo = ReferralHero;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		5377F7832A1370510038FB17 /* ReferralHero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReferralHero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5377F7862A1370510038FB17 /* ReferralHero.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReferralHero.h; sourceTree = "<group>"; };
 		5377F7872A1370510038FB17 /* ReferralHero.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = ReferralHero.docc; sourceTree = "<group>"; };
-		5377F78D2A1370520038FB17 /* ReferralHeroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReferralHeroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5377F7922A1370520038FB17 /* ReferralHeroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralHeroTests.swift; sourceTree = "<group>"; };
 		5377F79E2A13725B0038FB17 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		5377F8A52A13C1BC0038FB17 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		5377F8AF2A149E740038FB17 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
@@ -49,14 +35,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5377F78A2A1370520038FB17 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5377F78E2A1370520038FB17 /* ReferralHero.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -64,7 +42,6 @@
 			isa = PBXGroup;
 			children = (
 				5377F7852A1370510038FB17 /* ReferralHero */,
-				5377F7912A1370520038FB17 /* ReferralHeroTests */,
 				5377F7842A1370510038FB17 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,7 +50,6 @@
 			isa = PBXGroup;
 			children = (
 				5377F7832A1370510038FB17 /* ReferralHero.framework */,
-				5377F78D2A1370520038FB17 /* ReferralHeroTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,14 +64,6 @@
 				5377F7872A1370510038FB17 /* ReferralHero.docc */,
 			);
 			path = ReferralHero;
-			sourceTree = "<group>";
-		};
-		5377F7912A1370520038FB17 /* ReferralHeroTests */ = {
-			isa = PBXGroup;
-			children = (
-				5377F7922A1370520038FB17 /* ReferralHeroTests.swift */,
-			);
-			path = ReferralHeroTests;
 			sourceTree = "<group>";
 		};
 		5377F79D2A1372150038FB17 /* APIManager */ = {
@@ -140,24 +108,6 @@
 			productReference = 5377F7832A1370510038FB17 /* ReferralHero.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		5377F78C2A1370520038FB17 /* ReferralHeroTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5377F79A2A1370520038FB17 /* Build configuration list for PBXNativeTarget "ReferralHeroTests" */;
-			buildPhases = (
-				5377F7892A1370520038FB17 /* Sources */,
-				5377F78A2A1370520038FB17 /* Frameworks */,
-				5377F78B2A1370520038FB17 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5377F7902A1370520038FB17 /* PBXTargetDependency */,
-			);
-			name = ReferralHeroTests;
-			productName = ReferralHeroTests;
-			productReference = 5377F78D2A1370520038FB17 /* ReferralHeroTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -169,9 +119,6 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					5377F7822A1370510038FB17 = {
-						CreatedOnToolsVersion = 14.3;
-					};
-					5377F78C2A1370520038FB17 = {
 						CreatedOnToolsVersion = 14.3;
 					};
 				};
@@ -190,20 +137,12 @@
 			projectRoot = "";
 			targets = (
 				5377F7822A1370510038FB17 /* ReferralHero */,
-				5377F78C2A1370520038FB17 /* ReferralHeroTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5377F7812A1370510038FB17 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5377F78B2A1370520038FB17 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -226,29 +165,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5377F7892A1370520038FB17 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5377F7932A1370520038FB17 /* ReferralHeroTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		5377F7902A1370520038FB17 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5377F7822A1370510038FB17 /* ReferralHero */;
-			targetProxy = 5377F78F2A1370520038FB17 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		5377F7952A1370520038FB17 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					x86_64,
+					arm64,
+				);
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -312,6 +239,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					x86_64,
+					arm64,
+				);
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -368,6 +299,7 @@
 		5377F7982A1370520038FB17 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -384,6 +316,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = mh_dylib;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
@@ -399,6 +332,7 @@
 		5377F7992A1370520038FB17 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -415,6 +349,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = mh_dylib;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
@@ -422,38 +357,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		5377F79B2A1370520038FB17 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Yesha.ReferralHeroTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		5377F79C2A1370520038FB17 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Yesha.ReferralHeroTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -476,15 +379,6 @@
 			buildConfigurations = (
 				5377F7982A1370520038FB17 /* Debug */,
 				5377F7992A1370520038FB17 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5377F79A2A1370520038FB17 /* Build configuration list for PBXNativeTarget "ReferralHeroTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5377F79B2A1370520038FB17 /* Debug */,
-				5377F79C2A1370520038FB17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

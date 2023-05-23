@@ -55,7 +55,21 @@ public class API_HELPER
             }
         }
     }
+    //MARK: - Subscriber Detail API -
     
+    func SubscriberDetail(){
+        WEB_SER.api_GET(endPoint: subscribers + "\(user?.data?.id ?? "")", param: [:])
+        { [self] (result) in
+            switch result{
+                case .success(let response):
+                    delegate?.didReceiveAPIResponse(response, "DeleteReferral")
+                    print(response)
+                case .failure(let err):
+                    delegate?.didFailWithError(err, "DeleteReferral")
+                    print(err)
+            }
+        }
+    }
     //MARK: - Confirm Referral API -
     
     func ConfirmReferral(){
@@ -71,9 +85,9 @@ public class API_HELPER
             }
         }
     }
-    //MARK: - Delete Referral API -
+    //MARK: - Delete Subscriber API -
     
-    func DeleteReferral(){
+    func DeleteSubscriber(){
         WEB_SER.api_DELETE(endPoint: subscribers + "\(user?.data?.id ?? "")", param: [:])
         { [self] (result) in
             switch result{

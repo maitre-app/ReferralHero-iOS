@@ -35,6 +35,9 @@ public struct RHSubscriber{
     public var email: String
     public var domain: String
     public var name: String
+    public var ip_address: String? = RHKey.IP
+    public var os_type: String? = RHKey.OS
+    public var screen_size: String? = RHKey.SCREEN_SIZE
     public var extra_field: String?
     public var extra_field2: String?
     public var status: String?
@@ -42,15 +45,19 @@ public struct RHSubscriber{
     public var points: String?
     public var double_optin: String?
     public var source: String?
-    public var device: String?
+    public var device: String? = RHKey.Device
     public var conversion_value: String?
     public var conversion_category: String?
     public var transaction_id: String?
+    // Usage
     
-    public init(email: String, domain: String, name: String, extra_field: String? = nil, extra_field2: String? = nil, status: String? = nil, referrer: String? = nil, points: String? = nil, double_optin: String? = nil, source: String? = nil, device: String? = nil, conversion_value: String? = nil, conversion_category: String? = nil, transaction_id: String? = nil) {
+    public init(email: String, domain: String, name: String, ip_address: String? = nil, os_type: String? = nil, screen_size: String? = nil, extra_field: String? = nil, extra_field2: String? = nil, status: String? = nil, referrer: String? = nil, points: String? = nil, double_optin: String? = nil, source: String? = nil, device: String? = nil, conversion_value: String? = nil, conversion_category: String? = nil, transaction_id: String? = nil) {
         self.email = email
         self.domain = domain
         self.name = name
+        self.ip_address = ip_address
+        self.os_type = os_type
+        self.screen_size = screen_size
         self.extra_field = extra_field
         self.extra_field2 = extra_field2
         self.status = status
@@ -80,7 +87,9 @@ public struct RHSubscriber{
         dictionary["conversion_value"] = conversion_value
         dictionary["conversion_category"] = conversion_category
         dictionary["transaction_id"] = transaction_id
-        
+        print("-----------------------------")
+        print(dictionary)
+        print("-----------------------------")
         return dictionary
     }
 }

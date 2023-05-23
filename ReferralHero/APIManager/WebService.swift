@@ -29,7 +29,7 @@ class WEB_HELPER
     }
     
     //MARK:- GET SERVICE
-    func api_GET(endPoint: String, param: [String : String], completion: @escaping (Result<[String: Any], Error>) -> Void)
+    func api_GET(endPoint: String, param: [String : Any], completion: @escaping (Result<[String: Any], Error>) -> Void)
     {
         let passParam = self.getDefaultParam(param: param)
         
@@ -167,7 +167,7 @@ class WEB_HELPER
         task.resume()
     }
     //MARK:- PUT SERVICE
-    func api_PUT(endPoint: String, param: [String : String], completion: @escaping (Result<[String: Any], Error>) -> Void) {
+    func api_PUT(endPoint: String, param: [String : Any], completion: @escaping (Result<[String: Any], Error>) -> Void) {
         let passParam = self.getDefaultParam(param: param)
         
         guard let url = URL(string: self.getBaseUrl() + endPoint) else {
