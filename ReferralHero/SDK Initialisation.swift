@@ -11,36 +11,36 @@ import UIKit
 
 var decoder: JSONDecoder = { return JSONDecoder() }()
 var user: SubscriberModel? = nil
-public let RHKey = RHApiKey.shared
 
 public class RHApiKey {
     
-    private init() { }
-    static let shared = RHApiKey()
-    
     public static var apiKey: String = ""
     public static var uuID: String = ""
-    var IP: String = ""
-    var Device: String = ""
-    var OS: String = ""
-    var SCREEN_SIZE = ""
+    public static var IP: String = ""
+    public static var Device: String = ""
+    public static var OS: String = ""
+    public static var SCREEN_SIZE = ""
     
     public static func configure(withAPIKey apiKey: String, withuuID uuID: String) {
         RHApiKey.apiKey = apiKey
         RHApiKey.uuID = uuID
         RH.retrieveUserData()
-        RHKey.setDefaultParameters()
+        self.setDefaultParameters()
     }
     
-    func setDefaultParameters()
+    public static func setDefaultParameters()
     {
         let networkManager = NetworkManager()
         if let ipAddress = networkManager.getIPAddress() {
-            RHKey.IP = ipAddress
+            RHApiKey.IP = ipAddress
         }
-        RHKey.Device = networkManager.getDeviceInfo().modelName
-        RHKey.OS = networkManager.getDeviceInfo().osVersion
-        RHKey.SCREEN_SIZE = networkManager.getScreenSize()
+        RHApiKey.Device = networkManager.getDeviceInfo().modelName
+        RHApiKey.OS = networkManager.getDeviceInfo().osVersion
+        RHApiKey.SCREEN_SIZE = networkManager.getScreenSize()
+        print(RHApiKey.Device)
+        print(RHApiKey.IP)
+        print(RHApiKey.OS)
+        print(RHApiKey.SCREEN_SIZE)
     }
 }
 

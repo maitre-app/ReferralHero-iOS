@@ -35,9 +35,9 @@ public struct RHSubscriber{
     public var email: String
     public var domain: String
     public var name: String
-    public var ip_address: String? = RHKey.IP
-    public var os_type: String? = RHKey.OS
-    public var screen_size: String? = RHKey.SCREEN_SIZE
+    public var ip_address: String?
+    public var os_type: String?
+    public var screen_size: String?
     public var extra_field: String?
     public var extra_field2: String?
     public var status: String?
@@ -45,7 +45,7 @@ public struct RHSubscriber{
     public var points: String?
     public var double_optin: String?
     public var source: String?
-    public var device: String? = RHKey.Device
+    public var device: String?
     public var conversion_value: String?
     public var conversion_category: String?
     public var transaction_id: String?
@@ -86,17 +86,16 @@ public struct RHSubscriber{
         dictionary["device"] = device
         dictionary["conversion_value"] = conversion_value
         dictionary["conversion_category"] = conversion_category
-        dictionary["ip_address"] = ip_address
-        dictionary["device"] = device
-        dictionary["os_type"] = os_type
-        dictionary["screen_size"] = screen_size
+        dictionary["ip_address"] = RHApiKey.IP
+        dictionary["device"] = RHApiKey.Device
+        dictionary["os_type"] = RHApiKey.OS
+        dictionary["screen_size"] = RHApiKey.SCREEN_SIZE
         print("-----------------------------")
         print(dictionary)
         print("-----------------------------")
         return dictionary
     }
 }
-
 //MARK: - Subscriber Model -
 
 struct SubscriberModel : Codable {
