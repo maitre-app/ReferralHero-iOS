@@ -57,7 +57,6 @@ class NetworkManager {
     func getDeviceInfo() -> (modelName: String, osVersion: String) {
         let device = UIDevice.current
         let modelName = device.model
-        let systemName = device.systemName
         let systemVersion = device.systemVersion
         
         return (modelName,systemVersion)

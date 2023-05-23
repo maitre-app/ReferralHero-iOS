@@ -86,7 +86,10 @@ public struct RHSubscriber{
         dictionary["device"] = device
         dictionary["conversion_value"] = conversion_value
         dictionary["conversion_category"] = conversion_category
-        dictionary["transaction_id"] = transaction_id
+        dictionary["ip_address"] = ip_address
+        dictionary["device"] = device
+        dictionary["os_type"] = os_type
+        dictionary["screen_size"] = screen_size
         print("-----------------------------")
         print(dictionary)
         print("-----------------------------")
