@@ -33,7 +33,7 @@ public class API_HELPER
         if let data = UserDefaults.standard.data(forKey: "User") {
                 user = try? decoder.decode(SubscriberModel.self, from: data)
         } else {
-                debugPrint("User  not found in UserDefaults.")
+                debugPrint("User not found in UserDefaults.")
             }
     }
     
@@ -57,7 +57,7 @@ public class API_HELPER
     
     //MARK: - Subscriber Detail API -
     public func getSubscriberDetail(){
-        WEB_SER.api_GET(endPoint: subscribers + "\(user?.data?.id ?? "")", param: [:])
+        WEB_SER.api_GET(endPoint: subscribers + "/\(user?.data?.id ?? "")")
         { [self] (result, data) in
             switch result{
                 case .success(let response):
@@ -72,6 +72,36 @@ public class API_HELPER
         }
     }
     
+    //MARK: - Delete Subscriber API -
+    public func DeleteSubscriber(){
+        WEB_SER.api_DELETE(endPoint: subscribers + "/\(user?.data?.id ?? "")", param: [:])
+        { [self] (result) in
+            switch result{
+                case .success(let response):
+                    delegate?.didReceiveAPIResponse(response, "DeleteReferral")
+                    print(response)
+                case .failure(let err):
+                    delegate?.didFailWithError(err, "DeleteReferral")
+                    print(err)
+            }
+        }
+    }
+    //MARK: - Update Subscriber API -
+    public func UpdateSubscriber(param: RHSubscriber){
+        WEB_SER.api_PATCH(endPoint: subscribers + "/\(user?.data?.id ?? "")", param: param.toDictionary())
+        { [self] (result, data) in
+            switch result{
+                case .success(let response):
+                    self.storeUserData(response: data)
+                    self.retrieveUserData()
+                    delegate?.didReceiveAPIResponse(response, "UpdateSubscriber")
+                    print(response)
+                case .failure(let err):
+                    delegate?.didFailWithError(err, "UpdateSubscriber")
+                    print(err)
+            }
+        }
+    }
     //MARK: - Confirm Referral API -
     public func ConfirmReferral(){
         WEB_SER.api_POST(endPoint: subscribers + "/\(user?.data?.id ?? "")" + "/confirm", param: [:])
@@ -86,24 +116,8 @@ public class API_HELPER
             }
         }
     }
-    //MARK: - Delete Subscriber API -
-    
-    public func DeleteSubscriber(){
-        WEB_SER.api_DELETE(endPoint: subscribers + "\(user?.data?.id ?? "")", param: [:])
-        { [self] (result) in
-            switch result{
-                case .success(let response):
-                    delegate?.didReceiveAPIResponse(response, "DeleteReferral")
-                    print(response)
-                case .failure(let err):
-                    delegate?.didFailWithError(err, "DeleteReferral")
-                    print(err)
-            }
-        }
-    }
     //MARK: - Track Referral API -
-    
-    func trackReferral(param: RHTrackReferral){
+    public func trackReferral(param: RHTrackReferral){
         WEB_SER.api_POST(endPoint: subscribers + "/track_referral_conversion_event", param: param.toDictionary())
         { [self] (result, data) in
             switch result{

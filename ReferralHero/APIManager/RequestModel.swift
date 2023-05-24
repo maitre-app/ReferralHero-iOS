@@ -8,23 +8,17 @@
 //MARK: - Track Referral -
 
 public struct RHTrackReferral{
-    public var email: String? = user?.data?.email
-    public var phone_number: String? = user?.data?.phone_number
-    public var crypto_wallet_address: String? = user?.data?.crypto_wallet_address
-    public var referrer: String
-    public init(email: String?, phone_number: String, crypto_wallet_address: String, referrer: String) {
+    public var email: String
+    public var name: String
+    public init(email: String, name: String) {
         self.email = email
-        self.phone_number = phone_number
-        self.crypto_wallet_address = crypto_wallet_address
-        self.referrer = referrer
+        self.name = name
     }
     
     func toDictionary() -> [String: Any] {
         var dictionary: [String: Any] = [:]
         dictionary["email"] = email
-        dictionary["phone_number"] = phone_number
-        dictionary["crypto_wallet_address"] = crypto_wallet_address
-        dictionary["referrer"] = referrer
+        dictionary["name"] = name
         return dictionary
     }
 }
