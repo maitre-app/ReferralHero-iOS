@@ -29,12 +29,12 @@ class WEB_HELPER
     }
     
     //MARK:- GET SERVICE
-    func api_GET(endPoint: String, param: [String : Any], completion: @escaping (Result<[String: Any], Error>) -> Void)
+    func api_GET(endPoint: String, param: [String : Any], completion: @escaping (Result<[String: Any], Error>, Data?) -> Void)
     {
         let passParam = self.getDefaultParam(param: param)
         
         guard let url = URL(string: self.getBaseUrl() + endPoint) else {
-            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
+            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)), nil)
             return
         }
         
@@ -49,13 +49,13 @@ class WEB_HELPER
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
-                completion(.failure(error))
+                completion(.failure(error), nil)
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
-                completion(.failure(NSError(domain: "Invalid HTTP response", code: 0, userInfo: nil)))
+                completion(.failure(NSError(domain: "Invalid HTTP response", code: 0, userInfo: nil)), nil)
                 return
             }
             
@@ -63,12 +63,12 @@ class WEB_HELPER
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
                     if let dataDictionary = json as? [String: Any] {
-                        completion(.success(dataDictionary))
+                        completion(.success(dataDictionary), data)
                     } else {
-                        completion(.failure(NSError(domain: "Invalid JSON response", code: 0, userInfo: nil)))
+                        completion(.failure(NSError(domain: "Invalid JSON response", code: 0, userInfo: nil)), nil)
                     }
                 } catch {
-                    completion(.failure(error))
+                    completion(.failure(error), nil)
                 }
             }
         }

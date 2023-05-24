@@ -39,14 +39,13 @@ public class API_HELPER
     
     //MARK: - CreateNewSubscriber API -
     
-    public func Submit(param: RHSubscriber){
+    public func formSubmit(param: RHSubscriber){
         WEB_SER.api_POST(endPoint: subscribers, param: param.toDictionary())
         { [self] (result,data) in
             switch result{
                 case .success(let response):
                     self.storeUserData(response: data)
                     self.retrieveUserData()
-                    ConfirmReferral()
                     delegate?.didReceiveAPIResponse(response, "Create new subscriber")
                     print(response)
                 case .failure(let err):
@@ -55,24 +54,26 @@ public class API_HELPER
             }
         }
     }
-    //MARK: - Subscriber Detail API -
     
-    func SubscriberDetail(){
+    //MARK: - Subscriber Detail API -
+    public func getSubscriberDetail(){
         WEB_SER.api_GET(endPoint: subscribers + "\(user?.data?.id ?? "")", param: [:])
-        { [self] (result) in
+        { [self] (result, data) in
             switch result{
                 case .success(let response):
-                    delegate?.didReceiveAPIResponse(response, "DeleteReferral")
+                    self.storeUserData(response: data)
+                    self.retrieveUserData()
+                    delegate?.didReceiveAPIResponse(response, "SubscriberDetail")
                     print(response)
                 case .failure(let err):
-                    delegate?.didFailWithError(err, "DeleteReferral")
+                    delegate?.didFailWithError(err, "SubscriberDetail")
                     print(err)
             }
         }
     }
-    //MARK: - Confirm Referral API -
     
-    func ConfirmReferral(){
+    //MARK: - Confirm Referral API -
+    public func ConfirmReferral(){
         WEB_SER.api_POST(endPoint: subscribers + "/\(user?.data?.id ?? "")" + "/confirm", param: [:])
         { [self] (result, data) in
             switch result{
@@ -87,7 +88,7 @@ public class API_HELPER
     }
     //MARK: - Delete Subscriber API -
     
-    func DeleteSubscriber(){
+    public func DeleteSubscriber(){
         WEB_SER.api_DELETE(endPoint: subscribers + "\(user?.data?.id ?? "")", param: [:])
         { [self] (result) in
             switch result{
@@ -102,7 +103,7 @@ public class API_HELPER
     }
     //MARK: - Track Referral API -
     
-    func TrackReferral(param: RHTrackReferral){
+    func trackReferral(param: RHTrackReferral){
         WEB_SER.api_POST(endPoint: subscribers + "/track_referral_conversion_event", param: param.toDictionary())
         { [self] (result, data) in
             switch result{
@@ -127,6 +128,7 @@ public class API_HELPER
                     print(response)
                 case .failure(let err):
                     delegate?.didFailWithError(err, "Promote")
+              
                     print(err)
             }
         }
