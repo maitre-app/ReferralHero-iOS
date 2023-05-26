@@ -16,10 +16,10 @@ public class API_HELPER
     
     public weak var delegate: RHDelegate?
     
-    //MARK: - EndPoints - GET -
-    
-    //MARK: - EndPoints - POST -
+    //MARK: - EndPoints -
     let subscribers = "/subscribers"
+    let leaderboard = "/leaderboard"
+    
     internal func storeUserData(response: Data?) {
         if let data = response
         {
@@ -38,7 +38,6 @@ public class API_HELPER
     }
     
     //MARK: - CreateNewSubscriber API -
-    
     public func formSubmit(param: RHSubscriber){
         WEB_SER.api_POST(endPoint: subscribers, param: param.toDictionary())
         { [self] (result,data) in
@@ -54,7 +53,6 @@ public class API_HELPER
             }
         }
     }
-    
     //MARK: - Subscriber Detail API -
     public func getSubscriberDetail(){
         WEB_SER.api_GET(endPoint: subscribers + "/\(user?.data?.id ?? "")")
@@ -71,7 +69,6 @@ public class API_HELPER
             }
         }
     }
-    
     //MARK: - Delete Subscriber API -
     public func DeleteSubscriber(){
         WEB_SER.api_DELETE(endPoint: subscribers + "/\(user?.data?.id ?? "")", param: [:])
@@ -102,16 +99,44 @@ public class API_HELPER
             }
         }
     }
-    //MARK: - Confirm Referral API -
-    public func ConfirmReferral(){
-        WEB_SER.api_POST(endPoint: subscribers + "/\(user?.data?.id ?? "")" + "/confirm", param: [:])
+    //MARK: - Click Capture API -
+    public func clickCapture(social: String){
+        WEB_SER.api_POST(endPoint: subscribers + "/\(user?.data?.id ?? "")" + "/click_capture", param: ["social" : social])
         { [self] (result, data) in
             switch result{
                 case .success(let response):
-                    delegate?.didReceiveAPIResponse(response, "Confirm referral")
+                    delegate?.didReceiveAPIResponse(response, "clickCapture")
                     print(response)
                 case .failure(let err):
-                    delegate?.didFailWithError(err, "Confirm referral")
+                    delegate?.didFailWithError(err, "clickCapture")
+                    print(err)
+            }
+        }
+    }
+    //MARK: - GetMyReferrals API -
+    public func getMyReferrals(){
+        WEB_SER.api_GET(endPoint: subscribers + "/\(user?.data?.id ?? "")" + "/referrals_data")
+        { [self] (result, data) in
+            switch result{
+                case .success(let response):
+                    delegate?.didReceiveAPIResponse(response, "getMyReferrals")
+                    print(response)
+                case .failure(let err):
+                    delegate?.didFailWithError(err, "getMyReferrals")
+                    print(err)
+            }
+        }
+    }
+    //MARK: - GetLeaderboard API -
+    public func getLeaderboard(){
+        WEB_SER.api_GET(endPoint: leaderboard)
+        { [self] (result, data) in
+            switch result{
+                case .success(let response):
+                    delegate?.didReceiveAPIResponse(response, "getLeaderboard")
+                    print(response)
+                case .failure(let err):
+                    delegate?.didFailWithError(err, "getLeaderboard")
                     print(err)
             }
         }
@@ -130,36 +155,38 @@ public class API_HELPER
             }
         }
     }
-    
-    //MARK: - Promote Referral API -
-    
-    func Promote(){
-        WEB_SER.api_POST(endPoint: subscribers + "/\(user?.data?.id ?? "")" + "/promote", param: [:])
-        { [self] (result, data) in
-            switch result{
-                case .success(let response):
-                    delegate?.didReceiveAPIResponse(response, "Promote")
-                    print(response)
-                case .failure(let err):
-                    delegate?.didFailWithError(err, "Promote")
-              
-                    print(err)
-            }
-        }
-    }
 }
 
-
-
-
-
-
-
-
-
-
-
-
+////MARK: - Confirm Referral API -
+//public func ConfirmReferral(){
+//    WEB_SER.api_POST(endPoint: subscribers + "/\(user?.data?.id ?? "")" + "/confirm", param: [:])
+//    { [self] (result, data) in
+//        switch result{
+//            case .success(let response):
+//                delegate?.didReceiveAPIResponse(response, "Confirm referral")
+//                print(response)
+//            case .failure(let err):
+//                delegate?.didFailWithError(err, "Confirm referral")
+//                print(err)
+//        }
+//    }
+//}
+////MARK: - Promote Referral API -
+//
+//func Promote(){
+//    WEB_SER.api_POST(endPoint: subscribers + "/\(user?.data?.id ?? "")" + "/promote", param: [:])
+//    { [self] (result, data) in
+//        switch result{
+//            case .success(let response):
+//                delegate?.didReceiveAPIResponse(response, "Promote")
+//                print(response)
+//            case .failure(let err):
+//                delegate?.didFailWithError(err, "Promote")
+//
+//                print(err)
+//        }
+//    }
+//}
 ////MARK:- CreateNewSubscriber API
 //public func CreateNewSubscriber(param: paraCreateNewSubscriber,completion: @escaping ([String: Any]?, Bool, String) -> ()){
 //    WEB_SER.api_POST(task: create_new_subscribers, param: param.toDictionary())
