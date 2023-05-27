@@ -74,7 +74,6 @@ class WEB_HELPER
     //MARK:- POST SERVICE
     func api_POST(endPoint: String, param: [String : Any], completion: @escaping (Result<[String: Any], Error>, Data?) -> Void) {
         let passParam = self.getDefaultParam(param: param)
-        
         guard let url = URL(string: self.getBaseUrl() + endPoint) else {
             completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)), nil)
             return
@@ -117,7 +116,51 @@ class WEB_HELPER
         
         task.resume()
     }
-    
+    //MARK:- POST SERVICE
+    func api_POST_V2(endPoint: String, param: [String : Any], completion: @escaping (Result<[String: Any], Error>, Data?) -> Void) {
+        let passParam = self.getDefaultParam(param: param)
+        guard let url = URL(string: "https://dev.referralhero.com/api/sdk/v2/lists/" + endPoint) else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)), nil)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+           if let jsonData = try? JSONSerialization.data(withJSONObject: passParam) {
+               request.httpBody = jsonData
+               request.addValue("application/vnd.referralhero.v1", forHTTPHeaderField: "Accept")
+               request.addValue(RHApiKey.apiKey, forHTTPHeaderField: "Authorization")
+               request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+           }
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                completion(.failure(error), nil)
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure(NSError(domain: "Invalid HTTP response", code: 0, userInfo: nil)), nil)
+                return
+            }
+            
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    if let dataDictionary = json as? [String: Any] {
+                        completion(.success(dataDictionary), data)
+                    } else {
+                        completion(.failure(NSError(domain: "Invalid JSON response", code: 0, userInfo: nil)), nil)
+                    }
+                } catch {
+                    completion(.failure(error), nil)
+                }
+            }
+        }
+        
+        task.resume()
+    }
     //MARK:- PATCH SERVICE
     func api_PATCH(endPoint: String, param: [String : Any], completion: @escaping (Result<[String: Any], Error>, Data?) -> Void) {
         let passParam = self.getDefaultParam(param: param)

@@ -155,22 +155,67 @@ public class API_HELPER
             }
         }
     }
+    //MARK: - Confirm Referral API -
+    public func ConfirmReferral(){
+        WEB_SER.api_POST(endPoint: subscribers + "/\(user?.data?.id ?? "")" + "/confirm", param: [:])
+        { [self] (result, data) in
+            switch result{
+                case .success(let response):
+                    delegate?.didReceiveAPIResponse(response, "Confirm referral")
+                    print(response)
+                case .failure(let err):
+                    delegate?.didFailWithError(err, "Confirm referral")
+                    print(err)
+            }
+        }
+    }
+    
+    //MARK: - Organic Track Referral API -
+    public func OrganicTrackReferral(param: RHOrganicReferral){
+        WEB_SER.api_POST(endPoint: subscribers + "/organic_track_referral", param: param.toDictionary())
+        { [self] (result, data) in
+            switch result{
+                case .success(let response):
+                    delegate?.didReceiveAPIResponse(response, "Organic Track Referral")
+                    print(response)
+                case .failure(let err):
+                    delegate?.didFailWithError(err, "Organic Track Referral")
+                    print(err)
+            }
+        }
+    }
+    
+    //MARK: - Create Pending Referral API -
+    public func CreatePendingReferral(param: RHReferral){
+        WEB_SER.api_POST(endPoint: subscribers + "/pending_referral", param: param.toDictionary())
+        { [self] (result, data) in
+            switch result{
+                case .success(let response):
+                    delegate?.didReceiveAPIResponse(response, "Create Pending Referral")
+                    print(response)
+                case .failure(let err):
+                    delegate?.didFailWithError(err, "Create Pending Referral")
+                    print(err)
+            }
+        }
+    }
 }
 
-////MARK: - Confirm Referral API -
-//public func ConfirmReferral(){
-//    WEB_SER.api_POST(endPoint: subscribers + "/\(user?.data?.id ?? "")" + "/confirm", param: [:])
-//    { [self] (result, data) in
-//        switch result{
-//            case .success(let response):
-//                delegate?.didReceiveAPIResponse(response, "Confirm referral")
-//                print(response)
-//            case .failure(let err):
-//                delegate?.didFailWithError(err, "Confirm referral")
-//                print(err)
+//    //MARK: - Create Visitor Referral API -
+//    public func CreateVisitorReferral(){
+//        WEB_SER.api_POST_V2(endPoint: subscribers + "/visitor_referral", param: [:])
+//        { [self] (result, data) in
+//            switch result{
+//                case .success(let response):
+//                    delegate?.didReceiveAPIResponse(response, "Create Visitor Referral")
+//                    print(response)
+//                case .failure(let err):
+//                    delegate?.didFailWithError(err, "Create Visitor Referral")
+//                    print(err)
+//            }
 //        }
 //    }
-//}
+
 ////MARK: - Promote Referral API -
 //
 //func Promote(){

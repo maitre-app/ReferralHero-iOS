@@ -22,7 +22,54 @@ public struct RHTrackReferral{
         return dictionary
     }
 }
-
+public struct RHOrganicReferral{
+    public var email: String
+    public var name: String
+    public var referrer: String?
+    public var hosting_url: String?
+    
+    public init(email: String, name: String, referrer: String? = nil, hosting_url: String? = nil) {
+        self.email = email
+        self.name = name
+        self.referrer = referrer
+        self.hosting_url = hosting_url
+    }
+    
+    func toDictionary() -> [String: Any] {
+        var dictionary: [String: Any] = [:]
+        dictionary["email"] = email
+        dictionary["name"] = name
+        dictionary["referrer"] = referrer
+        dictionary["hosting_url"] = hosting_url
+        return dictionary
+    }
+}
+public struct RHReferral{
+    public var email: String
+    public var name: String
+    public var referrer: String?
+    public var hosting_url: String?
+    
+    public init(email: String, name: String, referrer: String? = nil, hosting_url: String? = nil) {
+        self.email = email
+        self.name = name
+        self.referrer = referrer
+        self.hosting_url = hosting_url
+    }
+    
+    func toDictionary() -> [String: Any] {
+        var dictionary: [String: Any] = [:]
+        dictionary["email"] = email
+        dictionary["name"] = name
+        dictionary["referrer"] = referrer
+        dictionary["hosting_url"] = hosting_url
+        dictionary["os_type"] = "IOS"
+        dictionary["ip_address"] = RHApiKey.IP
+        dictionary["screen_size"] = RHApiKey.SCREEN_SIZE
+        dictionary["device"] = RHApiKey.Device
+        return dictionary
+    }
+}
 //MARK: - Create subscriber -
 
 public struct RHSubscriber{
@@ -82,7 +129,7 @@ public struct RHSubscriber{
         dictionary["conversion_category"] = conversion_category
         dictionary["ip_address"] = RHApiKey.IP
         dictionary["device"] = RHApiKey.Device
-        dictionary["os_type"] = RHApiKey.OS
+        dictionary["os_type"] = "IOS"
         dictionary["screen_size"] = RHApiKey.SCREEN_SIZE
         print("-----------------------------")
         print(dictionary)
