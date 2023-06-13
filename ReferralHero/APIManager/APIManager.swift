@@ -199,6 +199,36 @@ public class API_HELPER
             }
         }
     }
+
+    //MARK: - Referral List API -
+    public func RewardsList(){
+        WEB_SER.api_GET(endPoint: subscribers + "/\(user?.data?.id ?? "")" + "/rewards")
+        { [self] (result, data) in
+            switch result{
+                case .success(let response):
+                    delegate?.didReceiveAPIResponse(response, "Rewards List")
+                    print(response)
+                case .failure(let err):
+                    delegate?.didFailWithError(err, "Rewards List")
+                    print(err)
+            }
+        }
+    }
+    
+    //MARK: - Referrer List API -
+    public func ReferrerList(){
+        WEB_SER.api_GET(endPoint: subscribers + "/referrer")
+        { [self] (result, data) in
+            switch result{
+                case .success(let response):
+                    delegate?.didReceiveAPIResponse(response, "Referrer List")
+                    print(response)
+                case .failure(let err):
+                    delegate?.didFailWithError(err, "Referrer List")
+                    print(err)
+            }
+        }
+    }
 }
 
 //    //MARK: - Create Visitor Referral API -
