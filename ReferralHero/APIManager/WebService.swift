@@ -48,7 +48,7 @@ class WEB_HELPER
                 completion(.failure(error), nil)
                 return
             }
-            
+            print(response)
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
                 completion(.failure(NSError(domain: "Invalid HTTP response", code: 0, userInfo: nil)), nil)
@@ -78,7 +78,7 @@ class WEB_HELPER
             completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)), nil)
             return
         }
-        
+        print(url)
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
            if let jsonData = try? JSONSerialization.data(withJSONObject: passParam) {
@@ -93,7 +93,7 @@ class WEB_HELPER
                 completion(.failure(error), nil)
                 return
             }
-            
+            print(response)
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
                 completion(.failure(NSError(domain: "Invalid HTTP response", code: 0, userInfo: nil)), nil)
@@ -138,7 +138,7 @@ class WEB_HELPER
                 completion(.failure(error), nil)
                 return
             }
-            
+            print(response)
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
                 completion(.failure(NSError(domain: "Invalid HTTP response", code: 0, userInfo: nil)), nil)
@@ -184,7 +184,7 @@ class WEB_HELPER
                 completion(.failure(error), nil)
                 return
             }
-            
+            print(response)
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
                 completion(.failure(NSError(domain: "Invalid HTTP response", code: 0, userInfo: nil)), nil)
@@ -231,7 +231,7 @@ class WEB_HELPER
                 completion(.failure(error))
                 return
             }
-            
+            print(response)
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
                 completion(.failure(NSError(domain: "Invalid HTTP response", code: 0, userInfo: nil)))
@@ -276,7 +276,7 @@ class WEB_HELPER
                 completion(.failure(error))
                 return
             }
-            
+            print(response)
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
                 completion(.failure(NSError(domain: "Invalid HTTP response", code: 0, userInfo: nil)))

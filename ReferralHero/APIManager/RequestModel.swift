@@ -76,6 +76,7 @@ public struct RHSubscriber{
     public var email: String
     public var domain: String
     public var name: String
+    public var phone_number: String?
     public var ip_address: String?
     public var os_type: String?
     public var screen_size: String?
@@ -90,12 +91,15 @@ public struct RHSubscriber{
     public var conversion_value: String?
     public var conversion_category: String?
     public var transaction_id: String?
+    public var crypto_wallet_address: String?
+    
     // Usage
     
-    public init(email: String, domain: String, name: String, ip_address: String? = nil, os_type: String? = nil, screen_size: String? = nil, extra_field: String? = nil, extra_field2: String? = nil, status: String? = nil, referrer: String? = nil, points: String? = nil, double_optin: String? = nil, source: String? = nil, device: String? = nil, conversion_value: String? = nil, conversion_category: String? = nil, transaction_id: String? = nil) {
+    public init(email: String, domain: String, name: String, phone_number: String? = nil, ip_address: String? = nil, os_type: String? = nil, screen_size: String? = nil, extra_field: String? = nil, extra_field2: String? = nil, status: String? = nil, referrer: String? = nil, points: String? = nil, double_optin: String? = nil, source: String? = nil, device: String? = nil, conversion_value: String? = nil, conversion_category: String? = nil, transaction_id: String? = nil, crypto_wallet_address: String? = nil) {
         self.email = email
         self.domain = domain
         self.name = name
+        self.phone_number = phone_number
         self.ip_address = ip_address
         self.os_type = os_type
         self.screen_size = screen_size
@@ -110,6 +114,8 @@ public struct RHSubscriber{
         self.conversion_value = conversion_value
         self.conversion_category = conversion_category
         self.transaction_id = transaction_id
+        self.crypto_wallet_address = crypto_wallet_address
+        
     }
     
     func toDictionary() -> [String: Any] {
@@ -117,6 +123,7 @@ public struct RHSubscriber{
         dictionary["email"] = email
         dictionary["domain"] = domain
         dictionary["name"] = name
+        dictionary["phone_number"] = phone_number
         dictionary["extra_field"] = extra_field
         dictionary["extra_field2"] = extra_field2
         dictionary["status"] = status
@@ -131,6 +138,8 @@ public struct RHSubscriber{
         dictionary["device"] = RHApiKey.Device
         dictionary["os_type"] = "IOS"
         dictionary["screen_size"] = RHApiKey.SCREEN_SIZE
+        dictionary["crypto_wallet_address"] = crypto_wallet_address
+        
         print("-----------------------------")
         print(dictionary)
         print("-----------------------------")
