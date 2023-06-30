@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
   spec.homepage     = "https://github.com/maitre-app/ReferralHero-iOS"
 
 
-  # spec.license      = "MIT"
+  spec.license = { :type => "MIT", :file => "LICENSE" }
   spec.author             = { "Lamar Duffy" => "lamar@referralhero.com" }
   spec.platform     = :ios, "13.0"
 
