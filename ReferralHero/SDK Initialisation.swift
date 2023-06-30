@@ -8,6 +8,7 @@
 import Foundation
 import Network
 import UIKit
+import Network
 
 var decoder: JSONDecoder = { return JSONDecoder() }()
 var user: SubscriberModel? = nil
@@ -31,16 +32,21 @@ public class RHApiKey {
     public static func setDefaultParameters()
     {
         let networkManager = NetworkManager()
-        if let ipAddress = networkManager.getIPAddress() {
-            RHApiKey.IP = ipAddress
+//        if let ipAddress = networkManager.getInternalIPAddress() {
+//            RHApiKey.IP = ipAddress
+//        }
+        
+        networkManager.getPublicIPAddress { IP in
+            if let ipAddress = IP {
+                RHApiKey.IP = ipAddress
+                print("getPublicIPAddress.\(ipAddress)")
+                } else {
+                    print("Unable to fetch the public IP address.")
+                }
         }
         RHApiKey.Device = networkManager.getDeviceInfo().modelName
         RHApiKey.OS = networkManager.getDeviceInfo().osVersion
         RHApiKey.SCREEN_SIZE = networkManager.getScreenSize()
-        print(RHApiKey.Device)
-        print(RHApiKey.IP)
-        print(RHApiKey.OS)
-        print(RHApiKey.SCREEN_SIZE)
     }
 }
 
@@ -61,7 +67,53 @@ class NetworkManager {
         
         return (modelName,systemVersion)
     }
+
+    func getInternalIPAddress() -> String? {
+        var ipAddress: String?
+
+        var ifaddr: UnsafeMutablePointer<ifaddrs>? = nil
+        if getifaddrs(&ifaddr) == 0 {
+            var ptr = ifaddr
+            while ptr != nil {
+                defer { ptr = ptr?.pointee.ifa_next }
+                
+                let interface = ptr?.pointee
+                let addrFamily = interface?.ifa_addr.pointee.sa_family
+                
+                if addrFamily == UInt8(AF_INET) { // IPv4
+                    let interfaceName = String(cString: (interface?.ifa_name)!)
+                    if interfaceName == "en0" { // Wi-Fi interface
+                        var ipAddressBuffer = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+                        if getnameinfo(interface?.ifa_addr, socklen_t((interface?.ifa_addr.pointee.sa_len)!), &ipAddressBuffer, socklen_t(ipAddressBuffer.count), nil, 0, NI_NUMERICHOST) == 0 {
+                            ipAddress = String(cString: ipAddressBuffer)
+                        }
+                    }
+                }
+            }
+            freeifaddrs(ifaddr)
+        }
+
+        return ipAddress
+    }
     
+    func getPublicIPAddress(completion: @escaping (String?) -> Void) {
+        let url = URL(string: "https://api.ipify.org/")!
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+            
+            if let data = data, let ipAddress = String(data: data, encoding: .utf8) {
+                completion(ipAddress)
+            } else {
+                completion(nil)
+            }
+        }
+        task.resume()
+    }
+
     func getIPAddress() -> String? {
         var address : String?
 
