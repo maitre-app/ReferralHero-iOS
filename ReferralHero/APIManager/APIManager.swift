@@ -229,6 +229,12 @@ public class API_HELPER
             }
         }
     }
+    
+    //MARK: - Logout API -
+    public func Logout(){
+        UserDefaults.standard.removeObject(forKey: "User")
+        UserDefaults.standard.synchronize()
+    }
 }
 
 //    //MARK: - Create Visitor Referral API -
