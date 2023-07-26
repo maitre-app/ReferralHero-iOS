@@ -234,6 +234,7 @@ public class API_HELPER
     public func Logout(){
         UserDefaults.standard.removeObject(forKey: "User")
         UserDefaults.standard.synchronize()
+        user = nil
     }
 }
 
