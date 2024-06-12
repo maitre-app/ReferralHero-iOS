@@ -230,6 +230,23 @@ public class API_HELPER
         }
     }
     
+    //MARK: - Get Referrer API -
+    public func GetReferrer(){
+    // this is how it needs to look:
+    // https://dev.referralhero.com/api/sdk/v1/lists/:uuid/subscribers/referrer
+        WEB_SER.api_GET(endPoint: subscribers + "/referrer")
+        { [self] (result, data) in
+            switch result{
+                case .success(let response):
+                    delegate?.didReceiveAPIResponse(response, "Get Referrer")
+                    print(response)
+                case .failure(let err):
+                    delegate?.didFailWithError(err, "Get Referrer")
+                    print(err)
+            }
+        }
+    }
+    
     //MARK: - Logout API -
     public func Logout(){
         UserDefaults.standard.removeObject(forKey: "User")

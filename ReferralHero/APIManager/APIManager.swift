@@ -214,7 +214,6 @@ public class API_HELPER
             }
         }
     }
-
     //MARK: - Referrer List API -
     public func ReferrerList(){
         WEB_SER.api_GET(endPoint: subscribers + "/referrer?os_type=ios&device=mobile&ip_address=\(RHApiKey.IP)&screen_size=\(RHApiKey.SCREEN_SIZE)")
@@ -225,6 +224,23 @@ public class API_HELPER
                     print(response)
                 case .failure(let err):
                     delegate?.didFailWithError(err, "Referrer List")
+                    print(err)
+            }
+        }
+    }
+    
+    //MARK: - Get Referrer API -
+    public func GetReferrer(){
+    // this is how it needs to look:
+    // https://dev.referralhero.com/api/sdk/v1/lists/:uuid/subscribers/referrer
+        WEB_SER.api_GET(endPoint: subscribers + "/referrer")
+        { [self] (result, data) in
+            switch result{
+                case .success(let response):
+                    delegate?.didReceiveAPIResponse(response, "Get Referrer")
+                    print(response)
+                case .failure(let err):
+                    delegate?.didFailWithError(err, "Get Referrer")
                     print(err)
             }
         }
