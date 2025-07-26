@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "ios-branch-deep-linking-attribution",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/BranchMetrics/ios-branch-deep-linking-attribution.git",
+      "state" : {
+        "revision" : "5d26cf6a7c25d90e749bd2c68d4a59bf46ddf65c",
+        "version" : "2.2.2"
+      }
+    }
+  ],
+  "version" : 2
+}
