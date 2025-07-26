@@ -39,7 +39,14 @@ public class API_HELPER
     
     //MARK: - CreateNewSubscriber API -
     public func formSubmit(param: RHSubscriber){
-        WEB_SER.api_POST(endPoint: subscribers, param: param.toDictionary())
+      var paramWithRef = param
+      if let refCode = RHApiKey.referrerCode {
+          paramWithRef.referrer = refCode
+      }
+        if let visId = RHApiKey.visitorID {
+            paramWithRef.visitorID = visId
+        }
+        WEB_SER.api_POST(endPoint: subscribers, param: paramWithRef.toDictionary())
         { [self] (result,data) in
             switch result{
                 case .success(let response):
@@ -172,7 +179,14 @@ public class API_HELPER
     
     //MARK: - Organic Track Referral API -
     public func OrganicTrackReferral(param: RHOrganicReferral){
-        WEB_SER.api_POST(endPoint: subscribers + "/organic_track_referral", param: param.toDictionary())
+      var paramWithRef = param
+      if let refCode = RHApiKey.referrerCode {
+          paramWithRef.referrer = refCode
+      }
+        if let visId = RHApiKey.visitorID {
+            paramWithRef.visitorID = visId
+        }
+        WEB_SER.api_POST(endPoint: subscribers + "/organic_track_referral", param: paramWithRef.toDictionary())
         { [self] (result, data) in
             switch result{
                 case .success(let response):
@@ -187,7 +201,14 @@ public class API_HELPER
     
     //MARK: - Create Pending Referral API -
     public func CreatePendingReferral(param: RHReferral){
-        WEB_SER.api_POST(endPoint: subscribers + "/pending_referral", param: param.toDictionary())
+      var paramWithRef = param
+      if let refCode = RHApiKey.referrerCode {
+          paramWithRef.referrer = refCode
+      }
+        if let visId = RHApiKey.visitorID {
+            paramWithRef.visitorID = visId
+        }
+        WEB_SER.api_POST(endPoint: subscribers + "/pending_referral", param: paramWithRef.toDictionary())
         { [self] (result, data) in
             switch result{
                 case .success(let response):
@@ -214,7 +235,6 @@ public class API_HELPER
             }
         }
     }
-
     //MARK: - Referrer List API -
     public func ReferrerList(){
         WEB_SER.api_GET(endPoint: subscribers + "/referrer?os_type=ios&device=mobile&ip_address=\(RHApiKey.IP)&screen_size=\(RHApiKey.SCREEN_SIZE)")
@@ -254,51 +274,3 @@ public class API_HELPER
         user = nil
     }
 }
-
-//    //MARK: - Create Visitor Referral API -
-//    public func CreateVisitorReferral(){
-//        WEB_SER.api_POST_V2(endPoint: subscribers + "/visitor_referral", param: [:])
-//        { [self] (result, data) in
-//            switch result{
-//                case .success(let response):
-//                    delegate?.didReceiveAPIResponse(response, "Create Visitor Referral")
-//                    print(response)
-//                case .failure(let err):
-//                    delegate?.didFailWithError(err, "Create Visitor Referral")
-//                    print(err)
-//            }
-//        }
-//    }
-
-////MARK: - Promote Referral API -
-//
-//func Promote(){
-//    WEB_SER.api_POST(endPoint: subscribers + "/\(user?.data?.id ?? "")" + "/promote", param: [:])
-//    { [self] (result, data) in
-//        switch result{
-//            case .success(let response):
-//                delegate?.didReceiveAPIResponse(response, "Promote")
-//                print(response)
-//            case .failure(let err):
-//                delegate?.didFailWithError(err, "Promote")
-//
-//                print(err)
-//        }
-//    }
-//}
-////MARK:- CreateNewSubscriber API
-//public func CreateNewSubscriber(param: paraCreateNewSubscriber,completion: @escaping ([String: Any]?, Bool, String) -> ()){
-//    WEB_SER.api_POST(task: create_new_subscribers, param: param.toDictionary())
-//    { [self] (result) in
-//        switch result{
-//            case .success(let response):
-//                completion(response, true, "Object parsed")
-//                delegate?.didReceiveAPIResponse(response)
-//                print(response)
-//            case .failure(let err):
-//                completion(nil, false, "Something went wrong")
-//                delegate?.didFailWithError(err)
-//                print(err)
-//        }
-//    }
-//}

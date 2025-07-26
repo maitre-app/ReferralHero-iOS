@@ -39,7 +39,14 @@ public class API_HELPER
     
     //MARK: - CreateNewSubscriber API -
     public func formSubmit(param: RHSubscriber){
-        WEB_SER.api_POST(endPoint: subscribers, param: param.toDictionary())
+      var paramWithRef = param
+      if let refCode = RHApiKey.referrerCode {
+          paramWithRef.referrer = refCode
+      }
+        if let visId = RHApiKey.visitorID {
+            paramWithRef.visitorID = visId
+        }
+        WEB_SER.api_POST(endPoint: subscribers, param: paramWithRef.toDictionary())
         { [self] (result,data) in
             switch result{
                 case .success(let response):
@@ -172,7 +179,14 @@ public class API_HELPER
     
     //MARK: - Organic Track Referral API -
     public func OrganicTrackReferral(param: RHOrganicReferral){
-        WEB_SER.api_POST(endPoint: subscribers + "/organic_track_referral", param: param.toDictionary())
+      var paramWithRef = param
+      if let refCode = RHApiKey.referrerCode {
+          paramWithRef.referrer = refCode
+      }
+        if let visId = RHApiKey.visitorID {
+            paramWithRef.visitorID = visId
+        }
+        WEB_SER.api_POST(endPoint: subscribers + "/organic_track_referral", param: paramWithRef.toDictionary())
         { [self] (result, data) in
             switch result{
                 case .success(let response):
@@ -187,7 +201,14 @@ public class API_HELPER
     
     //MARK: - Create Pending Referral API -
     public func CreatePendingReferral(param: RHReferral){
-        WEB_SER.api_POST(endPoint: subscribers + "/pending_referral", param: param.toDictionary())
+      var paramWithRef = param
+      if let refCode = RHApiKey.referrerCode {
+          paramWithRef.referrer = refCode
+      }
+        if let visId = RHApiKey.visitorID {
+            paramWithRef.visitorID = visId
+        }
+        WEB_SER.api_POST(endPoint: subscribers + "/pending_referral", param: paramWithRef.toDictionary())
         { [self] (result, data) in
             switch result{
                 case .success(let response):

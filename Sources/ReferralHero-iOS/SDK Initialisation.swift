@@ -9,6 +9,7 @@ import Foundation
 import Network
 import UIKit
 import Network
+import BranchSDK
 
 var decoder: JSONDecoder = { return JSONDecoder() }()
 var user: SubscriberModel? = nil
@@ -21,14 +22,28 @@ public class RHApiKey {
     public static var Device: String = ""
     public static var OS: String = ""
     public static var SCREEN_SIZE = ""
+    public static var referrerCode: String? = nil
+    public static var visitorID: String? = nil
     
-    public static func configure(withAPIKey apiKey: String, withuuID uuID: String) {
+    public static func configure(withAPIKey apiKey: String, withuuID uuID: String, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil, branchKey: String) {
         RHApiKey.apiKey = apiKey
         RHApiKey.uuID = uuID
         RH.retrieveUserData()
+        
+        // Initialize Branch SDK to get referral code
+        Branch.getInstance(branchKey).initSession(launchOptions: launchOptions) { (params, error) in
+            if let refCode = params?["referral_code"] as? String {
+                RHApiKey.referrerCode = refCode
+                print("referral code received: \(refCode)")
+            }
+            if let visitorID = params?["visitor_id"] as? String {
+                RHApiKey.visitorID = visitorID
+                print("visitorID received: \(visitorID)")
+            }
+        }
         self.setDefaultParameters()
     }
-    
+  
     public static func setDefaultParameters()
     {
         let networkManager = NetworkManager()
@@ -150,5 +165,14 @@ class NetworkManager {
         freeifaddrs(ifaddr)
 
         return address
+    }
+}
+
+public class BranchHelper {
+    public static func handle(userActivity: NSUserActivity) -> Bool {
+        return Branch.getInstance().continue(userActivity)
+    }
+    public static func handle(url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
+        return Branch.getInstance().application(UIApplication.shared, open: url, options: options)
     }
 }

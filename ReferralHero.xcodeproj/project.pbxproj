@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18E603E52E34F2FC009FA918 /* BranchSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 18E603E42E34F2FC009FA918 /* BranchSDK */; };
 		5377F7882A1370510038FB17 /* ReferralHero.docc in Sources */ = {isa = PBXBuildFile; fileRef = 5377F7872A1370510038FB17 /* ReferralHero.docc */; };
 		5377F7942A1370520038FB17 /* ReferralHero.h in Headers */ = {isa = PBXBuildFile; fileRef = 5377F7862A1370510038FB17 /* ReferralHero.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5377F79F2A13725B0038FB17 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5377F79E2A13725B0038FB17 /* APIManager.swift */; };
@@ -32,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E603E52E34F2FC009FA918 /* BranchSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +134,9 @@
 				Base,
 			);
 			mainGroup = 5377F7792A1370510038FB17;
+			packageReferences = (
+				18E603E32E34F2FC009FA918 /* XCRemoteSwiftPackageReference "ios-branch-deep-linking-attribution" */,
+			);
 			productRefGroup = 5377F7842A1370510038FB17 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -380,6 +385,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		18E603E32E34F2FC009FA918 /* XCRemoteSwiftPackageReference "ios-branch-deep-linking-attribution" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BranchMetrics/ios-branch-deep-linking-attribution.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.12.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		18E603E42E34F2FC009FA918 /* BranchSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18E603E32E34F2FC009FA918 /* XCRemoteSwiftPackageReference "ios-branch-deep-linking-attribution" */;
+			productName = BranchSDK;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5377F77A2A1370510038FB17 /* Project object */;
 }

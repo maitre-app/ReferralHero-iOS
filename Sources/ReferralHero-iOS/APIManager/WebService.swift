@@ -16,8 +16,8 @@ class WEB_HELPER
     
     private func getBaseUrl() -> String
     {
-       // return "https://dev.referralhero.com/api/sdk/v1/lists/" + RHApiKey.uuID
-        return "https://app.referralhero.com/api/sdk/v1/lists/" + RHApiKey.uuID
+        // return "https://dev.referralhero.com/api/sdk/v1/lists/" + RHApiKey.uuID
+            return "https://app.referralhero.com/api/sdk/v1/lists/" + RHApiKey.uuID
     }
     
     private func getDefaultParam(param: [String : Any]) -> [String : Any]
