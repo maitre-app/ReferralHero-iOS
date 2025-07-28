@@ -27,14 +27,14 @@ public struct RHOrganicReferral{
     public var name: String
     public var referrer: String?
     public var hosting_url: String?
-    public var visitorID: String?
+    public var visitorId: String?
     
-    public init(email: String, name: String, referrer: String? = nil, hosting_url: String? = nil, visitorID: String? = nil) {
+    public init(email: String, name: String, referrer: String? = nil, hosting_url: String? = nil, visitorId: String? = nil) {
         self.email = email
         self.name = name
         self.referrer = referrer
         self.hosting_url = hosting_url
-        self.visitorID = visitorID
+        self.visitorId = visitorId
     }
     
     func toDictionary() -> [String: Any] {
@@ -43,7 +43,7 @@ public struct RHOrganicReferral{
         dictionary["name"] = name
         dictionary["referrer"] = referrer
         dictionary["hosting_url"] = hosting_url
-        dictionary["visitor_id"] = visitorID
+        dictionary["visitor_id"] = visitorId
         return dictionary
     }
 }
@@ -52,14 +52,14 @@ public struct RHReferral{
     public var name: String
     public var referrer: String?
     public var hosting_url: String?
-    public var visitorID: String?
+    public var visitorId: String?
     
-    public init(email: String, name: String, referrer: String? = nil, hosting_url: String? = nil, visitorID: String? = nil) {
+    public init(email: String, name: String, referrer: String? = nil, hosting_url: String? = nil, visitorId: String? = nil) {
         self.email = email
         self.name = name
         self.referrer = referrer
         self.hosting_url = hosting_url
-        self.visitorID = visitorID
+        self.visitorId = visitorId
     }
     
     func toDictionary() -> [String: Any] {
@@ -72,7 +72,7 @@ public struct RHReferral{
         dictionary["ip_address"] = RHApiKey.IP
         dictionary["screen_size"] = RHApiKey.SCREEN_SIZE
         dictionary["device"] = RHApiKey.Device
-        dictionary["visitor_id"] = visitorID
+        dictionary["visitor_id"] = visitorId
         return dictionary
     }
 }
@@ -98,11 +98,11 @@ public struct RHSubscriber{
     public var conversion_category: String?
     public var transaction_id: String?
     public var crypto_wallet_address: String?
-    public var visitorID: String?
+    public var visitorId: String?
     
     // Usage
     
-    public init(email: String, domain: String, name: String, phone_number: String? = nil, ip_address: String? = nil, os_type: String? = nil, screen_size: String? = nil, extra_field: String? = nil, extra_field2: String? = nil, status: String? = nil, referrer: String? = nil, points: String? = nil, double_optin: String? = nil, source: String? = nil, device: String? = nil, conversion_value: String? = nil, conversion_category: String? = nil, transaction_id: String? = nil, crypto_wallet_address: String? = nil, visitorID: String? = nil) {
+    public init(email: String, domain: String, name: String, phone_number: String? = nil, ip_address: String? = nil, os_type: String? = nil, screen_size: String? = nil, extra_field: String? = nil, extra_field2: String? = nil, status: String? = nil, referrer: String? = nil, points: String? = nil, double_optin: String? = nil, source: String? = nil, device: String? = nil, conversion_value: String? = nil, conversion_category: String? = nil, transaction_id: String? = nil, crypto_wallet_address: String? = nil, visitorId: String? = nil) {
         self.email = email
         self.domain = domain
         self.name = name
@@ -122,7 +122,7 @@ public struct RHSubscriber{
         self.conversion_category = conversion_category
         self.transaction_id = transaction_id
         self.crypto_wallet_address = crypto_wallet_address
-        self.visitorID = visitorID
+        self.visitorId = visitorId
     }
     
     func toDictionary() -> [String: Any] {
@@ -146,7 +146,7 @@ public struct RHSubscriber{
         dictionary["os_type"] = "IOS"
         dictionary["screen_size"] = RHApiKey.SCREEN_SIZE
         dictionary["crypto_wallet_address"] = crypto_wallet_address
-        dictionary["visitor_id"] = visitorID
+        dictionary["visitor_id"] = visitorId
         
         print("-----------------------------")
         print(dictionary)

@@ -43,8 +43,8 @@ public class API_HELPER
       if let refCode = RHApiKey.referrerCode {
           paramWithRef.referrer = refCode
       }
-        if let visId = RHApiKey.visitorID {
-            paramWithRef.visitorID = visId
+        if let visId = RHApiKey.visitorId {
+            paramWithRef.visitorId = visId
         }
         WEB_SER.api_POST(endPoint: subscribers, param: paramWithRef.toDictionary())
         { [self] (result,data) in
@@ -183,8 +183,8 @@ public class API_HELPER
       if let refCode = RHApiKey.referrerCode {
           paramWithRef.referrer = refCode
       }
-        if let visId = RHApiKey.visitorID {
-            paramWithRef.visitorID = visId
+        if let visId = RHApiKey.visitorId {
+            paramWithRef.visitorId = visId
         }
         WEB_SER.api_POST(endPoint: subscribers + "/organic_track_referral", param: paramWithRef.toDictionary())
         { [self] (result, data) in
@@ -205,8 +205,8 @@ public class API_HELPER
       if let refCode = RHApiKey.referrerCode {
           paramWithRef.referrer = refCode
       }
-        if let visId = RHApiKey.visitorID {
-            paramWithRef.visitorID = visId
+        if let visId = RHApiKey.visitorId {
+            paramWithRef.visitorId = visId
         }
         WEB_SER.api_POST(endPoint: subscribers + "/pending_referral", param: paramWithRef.toDictionary())
         { [self] (result, data) in

@@ -23,7 +23,7 @@ public class RHApiKey {
     public static var OS: String = ""
     public static var SCREEN_SIZE = ""
     public static var referrerCode: String? = nil
-    public static var visitorID: String? = nil
+    public static var visitorId: String? = nil
     
     public static func configure(withAPIKey apiKey: String, withuuID uuID: String, launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil, branchKey: String) {
         RHApiKey.apiKey = apiKey
@@ -36,9 +36,9 @@ public class RHApiKey {
                 RHApiKey.referrerCode = refCode
                 print("referral code received: \(refCode)")
             }
-            if let visitorID = params?["visitor_id"] as? String {
-                RHApiKey.visitorID = visitorID
-                print("visitorID received: \(visitorID)")
+            if let visitorId = params?["visitor_id"] as? String {
+                RHApiKey.visitorId = visitorId
+                print("visitorId received: \(visitorId)")
             }
         }
         self.setDefaultParameters()
