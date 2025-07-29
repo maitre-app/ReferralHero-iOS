@@ -27,12 +27,14 @@ public struct RHOrganicReferral{
     public var name: String
     public var referrer: String?
     public var hosting_url: String?
+    public var visitorId: String?
     
-    public init(email: String, name: String, referrer: String? = nil, hosting_url: String? = nil) {
+    public init(email: String, name: String, referrer: String? = nil, hosting_url: String? = nil, visitorId: String? = nil) {
         self.email = email
         self.name = name
         self.referrer = referrer
         self.hosting_url = hosting_url
+        self.visitorId = visitorId
     }
     
     func toDictionary() -> [String: Any] {
@@ -41,6 +43,7 @@ public struct RHOrganicReferral{
         dictionary["name"] = name
         dictionary["referrer"] = referrer
         dictionary["hosting_url"] = hosting_url
+        dictionary["visitor_id"] = visitorId
         return dictionary
     }
 }
@@ -49,12 +52,14 @@ public struct RHReferral{
     public var name: String
     public var referrer: String?
     public var hosting_url: String?
+    public var visitorId: String?
     
-    public init(email: String, name: String, referrer: String? = nil, hosting_url: String? = nil) {
+    public init(email: String, name: String, referrer: String? = nil, hosting_url: String? = nil, visitorId: String? = nil) {
         self.email = email
         self.name = name
         self.referrer = referrer
         self.hosting_url = hosting_url
+        self.visitorId = visitorId
     }
     
     func toDictionary() -> [String: Any] {
@@ -64,9 +69,8 @@ public struct RHReferral{
         dictionary["referrer"] = referrer
         dictionary["hosting_url"] = hosting_url
         dictionary["os_type"] = "IOS"
-        dictionary["ip_address"] = RHApiKey.IP
-        dictionary["screen_size"] = RHApiKey.SCREEN_SIZE
         dictionary["device"] = RHApiKey.Device
+        dictionary["visitor_id"] = visitorId
         return dictionary
     }
 }
@@ -77,9 +81,7 @@ public struct RHSubscriber{
     public var domain: String
     public var name: String
     public var phone_number: String?
-    public var ip_address: String?
     public var os_type: String?
-    public var screen_size: String?
     public var extra_field: String?
     public var extra_field2: String?
     public var status: String?
@@ -92,17 +94,16 @@ public struct RHSubscriber{
     public var conversion_category: String?
     public var transaction_id: String?
     public var crypto_wallet_address: String?
+    public var visitorId: String?
     
     // Usage
     
-    public init(email: String, domain: String, name: String, phone_number: String? = nil, ip_address: String? = nil, os_type: String? = nil, screen_size: String? = nil, extra_field: String? = nil, extra_field2: String? = nil, status: String? = nil, referrer: String? = nil, points: String? = nil, double_optin: String? = nil, source: String? = nil, device: String? = nil, conversion_value: String? = nil, conversion_category: String? = nil, transaction_id: String? = nil, crypto_wallet_address: String? = nil) {
+    public init(email: String, domain: String, name: String, phone_number: String? = nil, os_type: String? = nil, extra_field: String? = nil, extra_field2: String? = nil, status: String? = nil, referrer: String? = nil, points: String? = nil, double_optin: String? = nil, source: String? = nil, device: String? = nil, conversion_value: String? = nil, conversion_category: String? = nil, transaction_id: String? = nil, crypto_wallet_address: String? = nil, visitorId: String? = nil) {
         self.email = email
         self.domain = domain
         self.name = name
         self.phone_number = phone_number
-        self.ip_address = ip_address
         self.os_type = os_type
-        self.screen_size = screen_size
         self.extra_field = extra_field
         self.extra_field2 = extra_field2
         self.status = status
@@ -115,7 +116,7 @@ public struct RHSubscriber{
         self.conversion_category = conversion_category
         self.transaction_id = transaction_id
         self.crypto_wallet_address = crypto_wallet_address
-        
+        self.visitorId = visitorId
     }
     
     func toDictionary() -> [String: Any] {
@@ -134,11 +135,10 @@ public struct RHSubscriber{
         dictionary["device"] = device
         dictionary["conversion_value"] = conversion_value
         dictionary["conversion_category"] = conversion_category
-        dictionary["ip_address"] = RHApiKey.IP
         dictionary["device"] = RHApiKey.Device
         dictionary["os_type"] = "IOS"
-        dictionary["screen_size"] = RHApiKey.SCREEN_SIZE
         dictionary["crypto_wallet_address"] = crypto_wallet_address
+        dictionary["visitor_id"] = visitorId
         
         print("-----------------------------")
         print(dictionary)
