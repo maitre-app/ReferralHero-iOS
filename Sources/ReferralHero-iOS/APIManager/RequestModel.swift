@@ -43,7 +43,7 @@ public struct RHOrganicReferral{
         dictionary["name"] = name
         dictionary["referrer"] = referrer
         dictionary["hosting_url"] = hosting_url
-        dictionary["visitor_id"] = hosting_url
+        dictionary["visitor_id"] = visitorId
         return dictionary
     }
 }
@@ -70,7 +70,7 @@ public struct RHReferral{
         dictionary["hosting_url"] = hosting_url
         dictionary["os_type"] = "IOS"
         dictionary["device"] = RHApiKey.Device
-        dictionary["visitor_id"] = hosting_url
+        dictionary["visitor_id"] = visitorId
         return dictionary
     }
 }
