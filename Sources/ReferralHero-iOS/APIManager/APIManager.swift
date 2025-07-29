@@ -237,9 +237,9 @@ public class API_HELPER
     }
     //MARK: - Referrer List API -
     public func ReferrerList(){
-        WEB_SER.api_GET(endPoint: subscribers + "/referrer?os_type=ios&device=mobile&ip_address=\(RHApiKey.IP)&screen_size=\(RHApiKey.SCREEN_SIZE)")
+        WEB_SER.api_GET(endPoint: subscribers + "/referrer?os_type=ios&device=mobile")
         { [self] (result, data) in
-            switch result{
+            switch result {
                 case .success(let response):
                     delegate?.didReceiveAPIResponse(response, "Referrer List")
                     print(response)
