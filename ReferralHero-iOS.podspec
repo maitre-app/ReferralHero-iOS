@@ -10,7 +10,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "ReferralHero-iOS"
-  spec.version      = "2.0.0"
+  spec.version      = "2.0.1"
   spec.summary      = "The ReferralHero SDK is a powerful tool for integrating referral functionality into your application."
 
   spec.description  = "It provides a seamless way for users to refer friends, track referrals, and incentivize user engagement. This repository contains all the necessary code and documentation to help you get started with integrating the ReferralHero SDK into your swift project."
